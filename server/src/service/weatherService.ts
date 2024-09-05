@@ -235,6 +235,44 @@ class WeatherService {
 }
   //private buildWeatherQuery(coordinates: Coordinates): string {}
   // TODO: Create fetchAndDestructureLocationData method
+  interface Coordinates {
+  lat: number;
+  lon: number;
+}
+
+class WeatherService {
+  private apiKey: string;
+  private baseURL: string;
+  private cityName: string;
+
+  constructor(cityName: string) {
+    this.apiKey = "205cda63c5c00fd2a76bff53053b4fee";
+    this.baseURL = "https://api.openweathermap.org/data/2.5/weather";
+    this.cityName = cityName;
+  }
+
+  // Method to build a geocode query based on the city name
+  private buildGeocodeQuery(): string {
+    return `${this.baseURL}?q=${encodeURIComponent(this.cityName)}&appid=${this.apiKey}`;
+  }
+
+  // Method to destructure location data from the API response
+  private destructureLocationData(locationData: any): Coordinates {
+    const { lat, lon } = locationData.coord;  // Adjust based on actual API response structure
+    return { lat, lon };
+  }
+  // Method to fetch and destructure location data
+  private async fetchAndDestructureLocationData(): Promise<Coordinates> {
+    const url = this.buildGeocodeQuery();
+
+    try {
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.status}`);
+      }
+
+      const data = await response.json();
   private async fetchAndDestructureLocationData() {}
   // TODO: Create fetchWeatherData method
   private async fetchWeatherData(coordinates: Coordinates) {}
