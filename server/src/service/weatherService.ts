@@ -273,15 +273,120 @@ class WeatherService {
       }
 
       const data = await response.json();
-  private async fetchAndDestructureLocationData() {}
+  //private async fetchAndDestructureLocationData() {}
   // TODO: Create fetchWeatherData method
-  private async fetchWeatherData(coordinates: Coordinates) {}
+   private buildWeatherQuery(coordinates: Coordinates): string {
+    const { lat, lon } = coordinates;
+    return `${this.baseURL}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`;
+  }
+
+  // Method to fetch weather data based on coordinates
+  private async fetchWeatherData(coordinates: Coordinates): Promise<any> {
+    const url = this.buildWeatherQuery(coordinates);
+
+    try {
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching weather data: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+
+    } catch (error) {
+      console.error("Error in fetchWeatherData:", error);
+      throw error;  // Re-throw the error for handling upstream
+    }
+  }
+}
+  //private async fetchWeatherData(coordinates: Coordinates) {}
   // TODO: Build parseCurrentWeather method
-  private parseCurrentWeather(response: any) {}
+  interface Weather {
+  temperature: number;
+  description: string;
+  humidity: number;
+}
+
+class WeatherService {
+  private apiKey: string;
+  private baseURL: string;
+
+  constructor() {
+    this.apiKey = "205cda63c5c00fd2a76bff53053b4fee";
+    this.baseURL = "https://api.openweathermap.org/data/2.5/weather";
+  }
+
+  // Method to build a weather query based on coordinates
+  private buildWeatherQuery(coordinates: Coordinates): string {
+    const { lat, lon } = coordinates;
+    return `${this.baseURL}?lat=${lat}&lon=${lon}&appid=${this.apiKey}&units=metric`;
+  }
+
+  // Method to fetch weather data based on coordinates
+  private async fetchWeatherData(coordinates: Coordinates): Promise<any> {
+    const url = this.buildWeatherQuery(coordinates);
+
+    try {
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching weather data: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+
+    } catch (error) {
+      console.error("Error in fetchWeatherData:", error);
+      throw error;  // Re-throw the error for handling upstream
+    }
+  }
+
+  // Method to parse current weather from API response
+  private parseCurrentWeather(response: any): Weather {
+    const temperature = response.main.temp;
+    const description = response.weather[0].description;
+    const humidity = response.main.humidity;
+
+    return {
+      temperature,
+      description,
+      humidity
+    };
+  }
+}
+  //private parseCurrentWeather(response: any) {}
   // TODO: Complete buildForecastArray method
-  private buildForecastArray(currentWeather: Weather, weatherData: any[]) {}
+  async function getAndBuildForecast() {
+  const weatherService = new WeatherService();
+  const coordinates: Coordinates = { lat: 51.5074, lon: -0.1278 }; // Example coordinates for London
+
+  try {
+    const forecastData = await weatherService.fetchForecastData(coordinates);
+    const forecasts = weatherService.buildForecastArray(weatherService.parseCurrentWeather(forecastData), forecastData.list);
+    console.log(forecasts);
+  } catch (error) {
+    console.error('Error getting or building forecast:', error);
+  }
+}
+
+  //private buildForecastArray(currentWeather: Weather, weatherData: any[]) {}
   // TODO: Complete getWeatherForCity method
-  async getWeatherForCity(city: string) {}
+  async function displayWeatherForCity() {
+  const weatherService = new WeatherService();
+
+  try {
+    const { currentWeather, forecast } = await weatherService.getWeatherForCity('London');
+    console.log('Current Weather:', currentWeather);
+    console.log('Forecast:', forecast);
+  } catch (error) {
+    console.error('Error getting weather data:', error);
+  }
+}
+
+displayWeatherForCity();
+  //async getWeatherForCity(city: string) {}
 }
 
 export default new WeatherService();
