@@ -147,9 +147,93 @@ class WeatherService {
 }
   //private destructureLocationData(locationData: Coordinates): Coordinates {}
   // TODO: Create buildGeocodeQuery method
-  private buildGeocodeQuery(): string {}
+  class WeatherService {
+  private apiKey: string;
+  private baseURL: string;
+  private latitude: number;
+  private longitude: number;
+
+  constructor(latitude: number, longitude: number) {
+    this.apiKey = "205cda63c5c00fd2a76bff53053b4fee";
+    this.baseURL = "https://api.openweathermap.org/data/2.5/weather";
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
+
+  // Method to build a geocode query based on latitude and longitude
+  private buildGeocodeQuery(): string {
+    return `${this.baseURL}?lat=${this.latitude}&lon=${this.longitude}&appid=${this.apiKey}`;
+  }
+
+  // Example method to fetch data using the built query
+  private async fetchLocationData(): Promise<void> {
+    const url = this.buildGeocodeQuery();
+
+    try {
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error) {
+      console.error("Error in fetchLocationData:", error);
+      throw error;  // Re-throw the error for handling upstream
+    }
+  }
+}
+   //private buildGeocodeQuery(): string {
+    //return `${this.baseURL}?lat=${this.latitude}&lon=${this.longitude}&appid=${this.apiKey}`;
+  
+
+  // Example method to fetch data using the built query
+//  private async fetchLocationData(): Promise<void> {
+  //private buildGeocodeQuery(): string {}
   // TODO: Create buildWeatherQuery method
-  private buildWeatherQuery(coordinates: Coordinates): string {}
+  interface Coordinates {
+  lat: number;
+  lon: number;
+}
+
+class WeatherService {
+  private apiKey: string;
+  private baseURL: string;
+
+  constructor() {
+    this.apiKey = "205cda63c5c00fd2a76bff53053b4fee";
+    this.baseURL = "https://api.openweathermap.org/data/2.5/weather";
+  }
+
+  // Method to build a weather query based on coordinates
+  private buildWeatherQuery(coordinates: Coordinates): string {
+    const { lat, lon } = coordinates;
+    return `${this.baseURL}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`;
+  }
+
+  // Example method to fetch weather data using the built query
+  private async fetchWeatherData(coordinates: Coordinates): Promise<void> {
+    const url = this.buildWeatherQuery(coordinates);
+
+    try {
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error) {
+      console.error("Error in fetchWeatherData:", error);
+      throw error;  // Re-throw the error for handling upstream
+    }
+  }
+}
+  //private buildWeatherQuery(coordinates: Coordinates): string {}
   // TODO: Create fetchAndDestructureLocationData method
   private async fetchAndDestructureLocationData() {}
   // TODO: Create fetchWeatherData method
