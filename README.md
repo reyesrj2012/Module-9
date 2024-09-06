@@ -1,8 +1,13 @@
 # Module-9 Weather Application
 
-## Getting started
+## Creating a Weather Application
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The application's front end has already been created. The application should connect the front end and back end. Then deployy the entire application to Render. 
+
+The base url should look like the following: 
+https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
+You must go to the base url to register for an API key. 
 
 Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
