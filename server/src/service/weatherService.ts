@@ -115,7 +115,20 @@ class WeatherService {
   }
 
   // TODO: Complete buildForecastArray method
-  // private buildForecastArray(currentWeather: Weather, weatherData: any[]) {}
+  //IS THIS A COMPLETE FUNCTION???
+   private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
+     // Initialize an empty array to store the forecast data
+  const forecastArray: Forecast[] = [];
+
+  // Push current weather to the forecast array
+  forecastArray.push({
+    date: new Date(),
+    temperature: currentWeather.temperature,
+    humidity = currentWeather.humidity, 
+    windSpeed = currentWeather.windSpeed, 
+  });
+   }
+//Is this function complete? 
 
   // TODO: Complete getWeatherForCity method
   async getWeatherForCity(city: string) {
