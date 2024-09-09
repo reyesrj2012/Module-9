@@ -16,7 +16,7 @@ Git hub link: https://github.com/reyesrj2012/Module-9
 Video: 
 
 ## Integrate with your tools
-You will 
+You will install 
 - [ ] [Set up project integrations](https://git.bootcampcontent.com/University-of-Minnesota/UofM-VIRT-FSF-PT-06-2024-U-LOLC/-/settings/integrations)
 
 ## Collaborate with your team
