@@ -8,17 +8,19 @@ interface Coordinates {
 }
 
 // TODO: Define a class for the Weather object
-  class Weather {
+export class Weather {
     city: string;
     temperature: number;
     windSpeed: string;
     humidity: string;
+    description: string;
 
-    constructor(city: string, temperature: number, windSpeed: string, humidity: string) {
+    constructor(city: string, temperature: number, windSpeed: string, humidity: string, description: string) {
         this.city = city;
         this.temperature = temperature;
         this.windSpeed = windSpeed;
         this.humidity = humidity;
+        this.description =description;
     }
 
     displayWeatherInfo() {
@@ -27,7 +29,7 @@ interface Coordinates {
 }
 
 // TODO: Complete the WeatherService class
-class WeatherService {
+/* class WeatherService {
   // TODO: Define the baseURL, API key, and city name properties
     private apiKey: string = "205cda63c5c00fd2a76bff53053b4fee";
     private baseURL: string  = "https://api.openweathermap.org/data/2.5/forecast";
@@ -110,22 +112,23 @@ class WeatherService {
     const temperature = response.main.temp;
     const humidity = response.main.humidity;
     const windSpeed = response.wind.speed;
+    const description =response.description;
 
-    return new Weather(this.cityName, temperature, windSpeed, humidity)
+    return new Weather(this.cityName, temperature, windSpeed, humidity, description)
   }
 
   // TODO: Complete buildForecastArray method
   //IS THIS A COMPLETE FUNCTION???
    private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
      // Initialize an empty array to store the forecast data
-  const forecastArray: Forecast[] = [];
+  const forecastArray: any[] = [];
 
   // Push current weather to the forecast array
   forecastArray.push({
     date: new Date(),
     temperature: currentWeather.temperature,
-    humidity = currentWeather.humidity, 
-    windSpeed = currentWeather.windSpeed, 
+    humidity: currentWeather.humidity, 
+    windSpeed: currentWeather.windSpeed, 
   });
    }
 //Is this function complete? 
@@ -150,3 +153,4 @@ class WeatherService {
 }
 
 export default new WeatherService();
+ */

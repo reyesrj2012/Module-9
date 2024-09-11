@@ -1,9 +1,12 @@
+import { Weather } from './service/weatherService.js';
 import dotenv from 'dotenv';
 import express from 'express';
+import historyService from './service/historyService.js';
 dotenv.config();
-
+historyService.addCity("string")
 // Import the routes
 import routes from './routes/index.js';
+//import weatherService from './service/weatherService.js';
 
 const app = express();
 
@@ -19,4 +22,8 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse URL-enco
 app.use(routes);
 
 // Start the server on the port
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
+app.listen(PORT, () => {
+    var myWeather = new Weather('London', 5,"65",'65', 'cloudy') 
+    myWeather.displayWeatherInfo()
+    console.log(`Listening on PORT: ${PORT}`)
+});

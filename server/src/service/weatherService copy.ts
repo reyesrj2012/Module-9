@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+/* import dotenv from 'dotenv';
 dotenv.config();
 
 // TODO: Define an interface for the Coordinates object
@@ -394,3 +394,4 @@ displayWeatherForCity();
 }
 
 export default new WeatherService();
+ */

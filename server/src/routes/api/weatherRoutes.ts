@@ -1,4 +1,4 @@
-import { Router } from 'express';
+/* import { Router } from 'express';
 const router = Router();
 
 import HistoryService from '../../service/historyService.js';
@@ -10,10 +10,10 @@ import HistoryService from '../../service/historyService.js';
 //   // TODO: save city to search history
 // });
 import express, { Request, Response } from 'express';
-const router = express.Router();
+
 
 // Assuming WeatherService and Coordinates are already defined and imported
-const weatherService = new WeatherService();
+//const weatherService = new WeatherService();
 
 // In-memory search history (you could replace this with a database)
 const searchHistory: string[] = [];
@@ -28,7 +28,7 @@ router.post('/', async (req: Request, res: Response) => {
 
   try {
     // Fetch weather data for the city
-    const { currentWeather, forecast } = await weatherService.getWeatherForCity(city);
+//    const { currentWeather, forecast } = await weatherService.getWeatherForCity(city);
 
     // Save city to search history
     searchHistory.push(city);
@@ -59,3 +59,4 @@ router.get('/history', async (_req, res) => {
 // router.delete('/history/:id', async (req, res) => {});
 
 export default router;
+ */
